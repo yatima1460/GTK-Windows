@@ -11,7 +11,7 @@ script:
   - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy Bypass'
   - git clone https://github.com/Microsoft/vcpkg.git
   - cd vcpkg
-  - bootstrap-vcpkg.bat
+  - cmd "/C bootstrap-vcpkg.bat"
   - vcpkg integrate install
   - vcpkg install gtk:x64-windows
   - vcpkg export --zip gtk:x64-windows
