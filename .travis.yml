@@ -19,7 +19,7 @@ script:
 before_deploy:
  - git config --local user.name "Federico Santamorena"
  - git config --local user.email "federico@santamorena.me"
- - find "build" -maxdepth 1 -not -type d
+ - find . -maxdepth 1 -not -type d
 
 deploy:
   provider: releases
@@ -32,7 +32,7 @@ deploy:
   file_glob: true
   api_key:
     secure: $GITHUB_TOKEN
-  file: *.zip
+  file: \*.zip
   on:
     repo: yatima1460/GTK3-Windows-x64
 
