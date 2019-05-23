@@ -12,13 +12,14 @@ script:
 language: cpp
 
 script:
-  - ls c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin
-  - ls c:\Program Files\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin
+  - ls "c:\Program Files (x86)"
+  - ls "c:\Program Files\"
+  - ls "c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
+  - ls "c:\Program Files\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
   - msbuild -v
-  - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy Bypass'
   - git clone https://github.com/Microsoft/vcpkg.git
   - cd vcpkg
-  - cmd "/C bootstrap-vcpkg.bat"
+  - ./bootstrap-vcpkg.bat
   - vcpkg integrate install
   - vcpkg install gtk:x64-windows
   - vcpkg export --zip gtk:x64-windows
