@@ -1,0 +1,42 @@
+branches:
+  only:
+  - master
+
+os:
+  - windows
+
+language: bash
+
+script:
+  - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'
+  - PowerShell -Command 'git clone https://github.com/Microsoft/vcpkg.git'
+  - PowerShell -Command 'cd vcpkg'
+  - PowerShell -Command '.\bootstrap-vcpkg.bat'
+  - PowerShell -Command '.\vcpkg integrate install'
+  - PowerShell -Command 'vcpkg install gtk:x64-windows'
+  - PowerShell -Command 'vcpkg export --zip gtk:x64-windows'
+  
+before_deploy:
+ - git config --local user.name "Federico Santamorena"
+ - git config --local user.email "federico@santamorena.me"
+ - find "build" -maxdepth 1 -not -type d
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  draft: false
+  prerelease: true
+  name: $TRAVIS_TAG
+  body: $TRAVIS_COMMIT_MESSAGE
+  target_commitish: $TRAVIS_COMMIT
+  file_glob: true
+  api_key:
+    secure: $GITHUB_TOKEN
+  file: *.zip
+  on:
+    repo: yatima1460/GTK3-Windows-x64
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
