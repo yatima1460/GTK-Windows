@@ -11,10 +11,10 @@ script:
   - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'
   - PowerShell -Command 'git clone https://github.com/Microsoft/vcpkg.git'
   - PowerShell -Command 'cd vcpkg'
-  - PowerShell -Command '.\\bootstrap-vcpkg.bat'
-  - PowerShell -Command '.\\vcpkg integrate install'
-  - PowerShell -Command 'vcpkg install gtk:x64-windows'
-  - PowerShell -Command 'vcpkg export --zip gtk:x64-windows'
+  - PowerShell -Command './bootstrap-vcpkg.bat'
+  - PowerShell -Command './vcpkg integrate install'
+  - PowerShell -Command './vcpkg install gtk:x64-windows'
+  - PowerShell -Command './vcpkg export --zip gtk:x64-windows'
   
 before_deploy:
  - git config --local user.name "Federico Santamorena"
