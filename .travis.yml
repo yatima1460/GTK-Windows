@@ -12,8 +12,9 @@ script:
 language: cpp
 
 script:
-  - msbuild
-  - msbuild -v
+  - ls $MSBUILD_PATH
+  - MSBuild
+  - MSBuild -v
   - git clone https://github.com/Microsoft/vcpkg.git
   - cd vcpkg
   - ./bootstrap-vcpkg.bat
