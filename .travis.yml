@@ -8,7 +8,7 @@ os:
 language: cpp
 
 script:
-  - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'
+  - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy unrestricted'
   - PowerShell -Command 'git clone https://github.com/Microsoft/vcpkg.git'
   - PowerShell -Command 'cd vcpkg'
   - PowerShell -Command 'bootstrap-vcpkg.bat'
