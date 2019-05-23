@@ -5,7 +5,7 @@ branches:
 os:
   - windows
 
-language: bash
+language: cpp
 
 script:
   - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'
