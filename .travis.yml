@@ -12,6 +12,8 @@ script:
 language: cpp
 
 script:
+  - ls c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin
+  - ls c:\Program Files\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin
   - msbuild -v
   - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy Bypass'
   - git clone https://github.com/Microsoft/vcpkg.git
