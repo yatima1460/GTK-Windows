@@ -9,12 +9,12 @@ language: cpp
 
 script:
   - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy Bypass'
-  - PowerShell -Command 'git clone https://github.com/Microsoft/vcpkg.git'
-  - PowerShell -Command 'cd vcpkg'
-  - PowerShell -Command './scripts/bootstrap.ps1'
-  - PowerShell -Command 'vcpkg integrate install'
-  - PowerShell -Command 'vcpkg install gtk:x64-windows'
-  - PowerShell -Command 'vcpkg export --zip gtk:x64-windows'
+  - git clone https://github.com/Microsoft/vcpkg.git
+  - cd vcpkg
+  - bootstrap-vcpkg.bat
+  - vcpkg integrate install
+  - vcpkg install gtk:x64-windows
+  - vcpkg export --zip gtk:x64-windows
   
 before_deploy:
  - git config --local user.name "Federico Santamorena"
