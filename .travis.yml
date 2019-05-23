@@ -12,6 +12,7 @@ script:
 language: cpp
 
 script:
+  - msbuild -v
   - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy Bypass'
   - git clone https://github.com/Microsoft/vcpkg.git
   - cd vcpkg
