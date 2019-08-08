@@ -1,0 +1,41 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+jobs:
+- job:
+  displayName: "GTK x86_64"
+  pool:
+    vmImage: 'Hosted VS2017'
+
+
+  steps:
+  - script: git clone https://github.com/Microsoft/vcpkg.git
+  - script: cd vcpkg
+  - script: git checkout 2019.07
+  - script: bootstrap-vcpkg.bat
+  - script: bootstrap-vcpkg.bat
+  - script: vcpkg integrate install
+  - script: vcpkg install gtk:x64-windows
+  - script: vcpkg export --zip gtk:x64-windows
+
+- job:
+  displayName: "GTK x86"
+  pool:
+    vmImage: 'Hosted VS2017'
+
+  steps:
+  - script: git clone https://github.com/Microsoft/vcpkg.git
+  - script: cd vcpkg
+  - script: git checkout 2019.07
+  - script: bootstrap-vcpkg.bat
+  - script: bootstrap-vcpkg.bat
+  - script: vcpkg integrate install
+  - script: vcpkg install gtk:x86-windows
+  - script: vcpkg export --zip gtk:x86-windows
+  
+
