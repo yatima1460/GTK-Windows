@@ -6,32 +6,46 @@
 trigger:
 - master
 
+variables:
+  VCPKG_URL: https://github.com/Microsoft/vcpkg.git
+  VCPKG_VERSION: 2019.07
+
 jobs:
 - job:
-  displayName: "GTK x86_64"
+  displayName: "GTK x86_64 VS2017"
   pool:
     name: 'Hosted VS2017'
-
-
   steps:
-  - script: git clone --single-branch --branch 2019.07 https://github.com/Microsoft/vcpkg.git
+  - script: git clone --single-branch --branch $(VCPKG_VERSION) $(VCPKG_URL)
   - script: cd vcpkg
   - script: bootstrap-vcpkg.bat
+    displayName: "Build vcpkg"
   - script: vcpkg integrate install
+    displayName: "Install vcpkg"
   - script: vcpkg install gtk:x64-windows
+    displayName: "Build gtk:x64-windows"
   - script: vcpkg export --zip gtk:x64-windows
+    displayName: "Export gtk:x64-windows"
 
 - job:
-  displayName: "GTK x86"
+  displayName: "GTK x86_64 VS2019"
   pool:
-    name: 'Hosted VS2017'
-
+    name: 'Hosted Windows 2019 with VS2019'
   steps:
-  - script: git clone --single-branch --branch 2019.07 https://github.com/Microsoft/vcpkg.git
+  - script: git clone --single-branch --branch $(VCPKG_VERSION) $(VCPKG_URL)
   - script: cd vcpkg
   - script: bootstrap-vcpkg.bat
+    displayName: "Build vcpkg"
   - script: vcpkg integrate install
-  - script: vcpkg install gtk:x86-windows
-  - script: vcpkg export --zip gtk:x86-windows
-  
+    displayName: "Install vcpkg"
+  - script: vcpkg install gtk:x64-windows
+    displayName: "Build gtk:x64-windows"
+  - script: vcpkg export --zip gtk:x64-windows
+    displayName: "Export gtk:x64-windows"
+
+
+
+
+
+
 
