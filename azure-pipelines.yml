@@ -37,7 +37,7 @@ jobs:
     displayName: "Export gtk:x64-windows"
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: 'vcpkg/GTK_x86_64_VS2015.zip'
+      targetPath: 'C:\\vcpkg\\GTK_x86_64_VS2015.zip'
       artifact: 'GTK_x86_64_VS2015.zip'
 
 
@@ -60,7 +60,7 @@ jobs:
     displayName: "Export gtk:x64-windows"
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: 'vcpkg/GTK_x86_64_VS2017.zip'
+      targetPath: 'C:\\vcpkg\\GTK_x86_64_VS2017.zip'
       artifact: 'GTK_x86_64_VS2017.zip'
 
 - job: GTK_x86_64_VS2019
@@ -80,7 +80,7 @@ jobs:
     displayName: "Export gtk:x64-windows"
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: 'vcpkg/GTK_x86_64_VS2019.zip'
+      targetPath: 'C:\\vcpkg\\GTK_x86_64_VS2019.zip'
       artifact: 'GTK_x86_64_VS2019.zip'
 
 - job: Publish
