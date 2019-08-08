@@ -2,6 +2,15 @@
 
 Binaries built using [vcpkg](https://github.com/microsoft/vcpkg) on Windows.
 
+|VS 2015|VS 2017|VS 2019|
+|------|------|------|
+|![](https://dev.azure.com/yatima1460/GTK3-Windows-x64/_apis/build/status/yatima1460.GTK3-Windows-x64?branchName=master&jobName=GTK%20x86_64%20VS2015)|![](https://dev.azure.com/yatima1460/GTK3-Windows-x64/_apis/build/status/yatima1460.GTK3-Windows-x64?branchName=master&jobName=GTK%20x86_64%20VS2017)|![](https://dev.azure.com/yatima1460/GTK3-Windows-x64/_apis/build/status/yatima1460.GTK3-Windows-x64?branchName=master&jobName=GTK%20x86_64%20VS2019)|
+
+|Publish|
+|------|
+|![](https://dev.azure.com/yatima1460/GTK3-Windows-x64/_apis/build/status/yatima1460.GTK3-Windows-x64?branchName=master&jobName=Publish)|
+
+
 # F.A.Q.
 
 - Where are the binaries and include files?
@@ -15,15 +24,6 @@ Binaries built using [vcpkg](https://github.com/microsoft/vcpkg) on Windows.
 - Why not x86 (32-bit)?
   - It's almost 2020 when I'm writing this, c'mon
 
-# Build Status
-
-|VS 2015|VS 2017|VS 2019|
-|------|------|------|
-|![](https://dev.azure.com/yatima1460/GTK3-Windows-x64/_apis/build/status/yatima1460.GTK3-Windows-x64?branchName=master&jobName=GTK%20x86_64%20VS2015)|![](https://dev.azure.com/yatima1460/GTK3-Windows-x64/_apis/build/status/yatima1460.GTK3-Windows-x64?branchName=master&jobName=GTK%20x86_64%20VS2017)|![](https://dev.azure.com/yatima1460/GTK3-Windows-x64/_apis/build/status/yatima1460.GTK3-Windows-x64?branchName=master&jobName=GTK%20x86_64%20VS2019)|
-
-|Publish|
-|------|
-|![](https://dev.azure.com/yatima1460/GTK3-Windows-x64/_apis/build/status/yatima1460.GTK3-Windows-x64?branchName=master&jobName=Publish)|
 
 # License
 
