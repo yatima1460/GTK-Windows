@@ -14,10 +14,8 @@ jobs:
 
 
   steps:
-  - script: git clone https://github.com/Microsoft/vcpkg.git
+  - script: git clone --single-branch --branch 2019.07 https://github.com/Microsoft/vcpkg.git
   - script: cd vcpkg
-  - script: git checkout 2019.07
-  - script: bootstrap-vcpkg.bat
   - script: bootstrap-vcpkg.bat
   - script: vcpkg integrate install
   - script: vcpkg install gtk:x64-windows
@@ -29,10 +27,8 @@ jobs:
     name: 'Hosted VS2017'
 
   steps:
-  - script: git clone https://github.com/Microsoft/vcpkg.git
+  - script: git clone --single-branch --branch 2019.07 https://github.com/Microsoft/vcpkg.git
   - script: cd vcpkg
-  - script: git checkout 2019.07
-  - script: bootstrap-vcpkg.bat
   - script: bootstrap-vcpkg.bat
   - script: vcpkg integrate install
   - script: vcpkg install gtk:x86-windows
