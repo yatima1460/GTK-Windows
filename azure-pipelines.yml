@@ -10,7 +10,7 @@ jobs:
 - job:
   displayName: "GTK x86_64"
   pool:
-    vmImage: 'Hosted VS2017'
+    name: 'Hosted VS2017'
 
 
   steps:
@@ -26,7 +26,7 @@ jobs:
 - job:
   displayName: "GTK x86"
   pool:
-    vmImage: 'Hosted VS2017'
+    name: 'Hosted VS2017'
 
   steps:
   - script: git clone https://github.com/Microsoft/vcpkg.git
