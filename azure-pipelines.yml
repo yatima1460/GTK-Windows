@@ -11,7 +11,30 @@ variables:
   VCPKG_VERSION: 2019.07
 
 jobs:
-- job:
+
+- job: GTK_x86_64_VS2015
+  displayName: "GTK x86_64 VS2015"
+  pool:
+    name: 'Hosted'
+  steps:
+  - script: git clone --single-branch --branch $(VCPKG_VERSION) $(VCPKG_URL)
+  - script: cd vcpkg
+  - script: bootstrap-vcpkg.bat
+    displayName: "Build vcpkg"
+  - script: vcpkg integrate install
+    displayName: "Install vcpkg"
+  - script: vcpkg install gtk:x64-windows
+    displayName: "Build gtk:x64-windows"
+  - script: vcpkg export gtk:x64-windows --zip --output=GTK_x86_64_VS2015
+    displayName: "Export gtk:x64-windows"
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'vcpkg/GTK_x86_64_VS2015.zip'
+      artifact: 'GTK_x86_64_VS2015.zip'
+
+
+
+- job: GTK_x86_64_VS2017
   displayName: "GTK x86_64 VS2017"
   pool:
     name: 'Hosted VS2017'
@@ -24,10 +47,14 @@ jobs:
     displayName: "Install vcpkg"
   - script: vcpkg install gtk:x64-windows
     displayName: "Build gtk:x64-windows"
-  - script: vcpkg export --zip gtk:x64-windows
+  - script: vcpkg export gtk:x64-windows --zip --output=GTK_x86_64_VS2017
     displayName: "Export gtk:x64-windows"
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'vcpkg/GTK_x86_64_VS2017.zip'
+      artifact: 'GTK_x86_64_VS2017.zip'
 
-- job:
+- job: GTK_x86_64_VS2019
   displayName: "GTK x86_64 VS2019"
   pool:
     name: 'Hosted Windows 2019 with VS2019'
@@ -40,10 +67,52 @@ jobs:
     displayName: "Install vcpkg"
   - script: vcpkg install gtk:x64-windows
     displayName: "Build gtk:x64-windows"
-  - script: vcpkg export --zip gtk:x64-windows
+  - script: vcpkg export gtk:x64-windows --zip --output=GTK_x86_64_VS2019
     displayName: "Export gtk:x64-windows"
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'vcpkg/GTK_x86_64_VS2019.zip'
+      artifact: 'GTK_x86_64_VS2019.zip'
 
-
+- job: Publish
+  displayName: "Publish"
+  dependsOn:
+    - GTK_x86_64_VS2015
+    - GTK_x86_64_VS2017
+    - GTK_x86_64_VS2019
+  pool:
+    name: 'Hosted Windows 2019 with VS2019'
+  steps:
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      buildType: 'current'
+      itemPattern: 'GTK_x86_64_VS2015.zip'
+      targetPath: '$(Pipeline.Workspace)'
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      buildType: 'current'
+      itemPattern: 'GTK_x86_64_VS2017.zip'
+      targetPath: '$(Pipeline.Workspace)'
+  - task: DownloadPipelineArtifact@2
+    inputs:
+      buildType: 'current'
+      itemPattern: 'GTK_x86_64_VS2019.zip'
+      targetPath: '$(Pipeline.Workspace)'
+  - task: GitHubRelease@0
+    inputs:
+      gitHubConnection: 'Azure GTK3-Windows-x64'
+      repositoryName: '$(Build.Repository.Name)'
+      action: 'create'
+      target: '$(Build.SourceVersion)'
+      tagSource: 'manual'
+      tag: '$(Build.BuildNumber)'
+      title: '$(Build.BuildNumber)'
+      releaseNotesSource: 'input'
+      releaseNotes: 'Automated Build $(Build.BuildNumber)'
+      assets: '$(Pipeline.Workspace)/*.zip'
+      addChangeLog: false
+  
+ 
 
 
 
