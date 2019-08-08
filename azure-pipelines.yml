@@ -14,6 +14,7 @@ jobs:
 
 - job: GTK_x86_64_VS2015
   displayName: "GTK x86_64 VS2015"
+  continueOnError: true
   pool:
     name: 'Hosted'
   steps:
@@ -36,6 +37,7 @@ jobs:
 
 - job: GTK_x86_64_VS2017
   displayName: "GTK x86_64 VS2017"
+  continueOnError: true
   pool:
     name: 'Hosted VS2017'
   steps:
