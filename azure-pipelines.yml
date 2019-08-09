@@ -27,13 +27,13 @@ jobs:
   steps:
   - script: git clone --single-branch --branch $(VCPKG_VERSION) $(VCPKG_URL)
   - script: cd vcpkg
-  - script: bootstrap-vcpkg
+  - script: .\\bootstrap-vcpkg.bat
     displayName: "Build vcpkg"
-  - script: vcpkg integrate install
+  - script: .\\vcpkg integrate install
     displayName: "Install vcpkg"
-  - script: vcpkg install gtk:x64-windows
+  - script: .\\vcpkg install gtk:x64-windows
     displayName: "Build gtk:x64-windows"
-  - script: vcpkg export gtk:x64-windows --zip --output=GTK_x86_64_VS2015
+  - script: .\\vcpkg export gtk:x64-windows --zip --output=GTK_x86_64_VS2015
     displayName: "Export gtk:x64-windows"
   - task: PublishPipelineArtifact@1
     inputs:
