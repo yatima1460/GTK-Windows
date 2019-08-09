@@ -17,13 +17,15 @@ Binaries built using [vcpkg](https://github.com/microsoft/vcpkg) on Windows.
   - Open/Extract the archive
   - `installed\x64-windows`
 - Which version of GTK? 
-  - `vcpkg` always builds the latest
+  - `vcpkg` always builds the latest GTK version
 - Where can I find the version?
   - Open/Extract the archive
   - `installed\vcpkg\info`
 - Why not x86 (32-bit)?
   - It's almost 2020 when I'm writing this, c'mon
-
+- How to use it with CMAKE?
+  - Open/Extract the archive
+  - `-DCMAKE_TOOLCHAIN_FILE=GTK_x86_64_VS20XX/scripts/buildsystems/vcpkg.cmake`
 
 # License
 
