@@ -27,7 +27,7 @@ jobs:
   steps:
   - script: git clone --single-branch --branch $(VCPKG_VERSION) $(VCPKG_URL)
   - script: cd vcpkg
-  - script: bootstrap-vcpkg.bat
+  - script: start bootstrap-vcpkg.bat
     displayName: "Build vcpkg"
   - script: vcpkg integrate install
     displayName: "Install vcpkg"
@@ -108,9 +108,12 @@ jobs:
       releaseNotesSource: 'input'
       releaseNotes: 'Automated Build $(Build.BuildNumber)'
       assets: |
-        $(Build.BinariesDirectory)/GTK_x86_64_VS2015.zip/GTK_x86_64_VS2015.zip.zip
-        $(Build.BinariesDirectory)/GTK_x86_64_VS2017.zip/GTK_x86_64_VS2017.zip.zip
-        $(Build.BinariesDirectory)/GTK_x86_64_VS2019.zip/GTK_x86_64_VS2019.zip.zip
+        $(Build.BinariesDirectory)/GTK_x86_64_VS2015.zip
+        $(Build.BinariesDirectory)/GTK_x86_64_VS2017.zip
+        $(Build.BinariesDirectory)/GTK_x86_64_VS2019.zip
+        $(Build.BinariesDirectory)/GTK_x86_64_VS2015.zip/GTK_x86_64_VS2015.zip
+        $(Build.BinariesDirectory)/GTK_x86_64_VS2017.zip/GTK_x86_64_VS2017.zip
+        $(Build.BinariesDirectory)/GTK_x86_64_VS2019.zip/GTK_x86_64_VS2019.zip
       addChangeLog: false
   
  
