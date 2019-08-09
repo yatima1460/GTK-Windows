@@ -95,18 +95,7 @@ jobs:
   - task: DownloadPipelineArtifact@2
     inputs:
       buildType: 'current'
-      itemPattern: 'GTK_x86_64_VS2015.zip'
-      targetPath: '$(Pipeline.Workspace)'
-  - task: DownloadPipelineArtifact@2
-    inputs:
-      buildType: 'current'
-      itemPattern: 'GTK_x86_64_VS2017.zip'
-      targetPath: '$(Pipeline.Workspace)'
-  - task: DownloadPipelineArtifact@2
-    inputs:
-      buildType: 'current'
-      itemPattern: 'GTK_x86_64_VS2019.zip'
-      targetPath: '$(Pipeline.Workspace)'
+      targetPath: '$(Build.BinariesDirectory)'
   - task: GitHubRelease@0
     inputs:
       gitHubConnection: 'Azure GTK3-Windows-x64'
@@ -118,7 +107,10 @@ jobs:
       title: '$(Build.BuildNumber)'
       releaseNotesSource: 'input'
       releaseNotes: 'Automated Build $(Build.BuildNumber)'
-      assets: '$(Pipeline.Workspace)/*.zip'
+      assets: |
+        $(Build.BinariesDirectory)/GTK_x86_64_VS2015.zip/GTK_x86_64_VS2015.zip.zip
+        $(Build.BinariesDirectory)/GTK_x86_64_VS2017.zip/GTK_x86_64_VS2017.zip.zip
+        $(Build.BinariesDirectory)/GTK_x86_64_VS2019.zip/GTK_x86_64_VS2019.zip.zip
       addChangeLog: false
   
  
