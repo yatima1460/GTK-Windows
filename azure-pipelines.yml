@@ -48,8 +48,7 @@ jobs:
     name: 'Hosted macOS'
   steps:
   - script: git clone --single-branch --branch $(VCPKG_VERSION) $(VCPKG_URL)
-  - script: cd vcpkg
-  - script: chmod +x ./bootstrap-vcpkg.sh
+  - script: cd vcpkg && chmod +x ./bootstrap-vcpkg.sh
   - script: ./bootstrap-vcpkg.sh
     displayName: "Build vcpkg"
   - script: chmod +x vcpkg
