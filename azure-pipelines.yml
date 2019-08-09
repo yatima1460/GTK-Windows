@@ -41,6 +41,29 @@ jobs:
       artifact: 'GTK_x86_64_VS2015.zip'
 
 
+- job: GTK_x86_64_macOS_Mojave
+  displayName: "GTK x86_64 OSX Mojave"
+  continueOnError: true
+  pool:
+    name: 'Hosted macOS'
+  steps:
+  - script: git clone --single-branch --branch $(VCPKG_VERSION) $(VCPKG_URL)
+  - script: cd vcpkg
+  - script: chmod +x ./bootstrap-vcpkg.sh
+  - script: ./bootstrap-vcpkg.sh
+    displayName: "Build vcpkg"
+  - script: chmod +x vcpkg
+  - script: ./vcpkg integrate install
+    displayName: "Install vcpkg"
+  - script: ./vcpkg install gtk:x64-osx
+    displayName: "Build gtk:x64-osx"
+  - script: ./vcpkg export gtk:x64-osx --zip --output=$(Build.BinariesDirectory)/GTK_x86_64_macOS_Mojave
+    displayName: "Export gtk:x64-osx"
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.BinariesDirectory)/GTK_x86_64_macOS_Mojave.zip'
+      artifact: 'GTK_x86_64_macOS_Mojave.zip'
+
 
 - job: GTK_x86_64_VS2017
   displayName: "GTK x86_64 VS2017"
@@ -86,6 +109,7 @@ jobs:
 - job: Publish
   displayName: "Publish"
   dependsOn:
+    - GTK_x86_64_macOS_Mojave
     - GTK_x86_64_VS2015
     - GTK_x86_64_VS2017
     - GTK_x86_64_VS2019
@@ -108,9 +132,7 @@ jobs:
       releaseNotesSource: 'input'
       releaseNotes: 'Automated Build $(Build.BuildNumber)'
       assets: |
-        $(Build.BinariesDirectory)/GTK_x86_64_VS2015.zip
-        $(Build.BinariesDirectory)/GTK_x86_64_VS2017.zip
-        $(Build.BinariesDirectory)/GTK_x86_64_VS2019.zip
+        $(Build.BinariesDirectory)/GTK_x86_64_macOS_Mojave.zip/GTK_x86_64_macOS_Mojave.zip
         $(Build.BinariesDirectory)/GTK_x86_64_VS2015.zip/GTK_x86_64_VS2015.zip
         $(Build.BinariesDirectory)/GTK_x86_64_VS2017.zip/GTK_x86_64_VS2017.zip
         $(Build.BinariesDirectory)/GTK_x86_64_VS2019.zip/GTK_x86_64_VS2019.zip
