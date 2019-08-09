@@ -27,7 +27,7 @@ jobs:
   steps:
   - script: git clone --single-branch --branch $(VCPKG_VERSION) $(VCPKG_URL)
   - script: cd vcpkg
-  - script: start bootstrap-vcpkg.bat
+  - script: bootstrap-vcpkg
     displayName: "Build vcpkg"
   - script: vcpkg integrate install
     displayName: "Install vcpkg"
