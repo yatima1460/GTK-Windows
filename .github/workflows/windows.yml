@@ -9,7 +9,6 @@ on:
   workflow_dispatch:
 
 env:
-  VCPKG_URL: https://github.com/Microsoft/vcpkg
   VCPKG_VERSION: 2021.05.12
 
 
@@ -23,7 +22,7 @@ jobs:
           uses: actions/checkout@v2
           with:
             repository: ${{ env.VCPKG_URL }}
-            path: vcpkg
+            path: Microsoft/vcpkg
             ref: ${{ env.VCPKG_VERSION }}
         - name: "Bootstrap vcpkg"
           run: bootstrap-vcpkg.bat
@@ -35,7 +34,7 @@ jobs:
           run: vcpkg install gtk:x64-windows
           working-directory: vcpkg
         - name: Export gtk:x64-windows
-          run: vcpkg export gtk:x64-windows --zip --output=GTK_x86_64_VS2019
+          run: vcpkg export gtk:x64-windows --zip --output=GTK_x64_VS2019
           working-directory: vcpkg
         - name: Create release
           uses: marvinpinto/action-automatic-releases@latest
@@ -44,5 +43,5 @@ jobs:
             automatic_release_tag: x64-windows
             prerelease: false
             title: "x64-windows"
-            files: vcpkg\GTK_x86_64_VS2019.zip
+            files: vcpkg\GTK_x64_VS2019.zip
           if: github.event_name != 'pull_request'
