@@ -20,7 +20,6 @@ jobs:
       runs-on: windows-2019
       steps:
         - name: "Clone vcpkg"
-        - name: Check out the repo
           uses: actions/checkout@v2
           with:
             repository: ${{ env.VCPKG_URL }}
