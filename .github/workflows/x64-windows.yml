@@ -1,0 +1,48 @@
+
+name: Windows
+
+on:  
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
+
+env:
+  VCPKG_URL: https://github.com/Microsoft/vcpkg
+  VCPKG_VERSION: 2021.05.12
+
+
+jobs:
+
+
+    x64-windows:
+      runs-on: windows-2019
+      steps:
+        - name: "Clone vcpkg"
+        - name: Check out the repo
+          uses: actions/checkout@v2
+          with:
+            repository: ${{ env.VCPKG_URL }}
+            path: vcpkg
+            ref: ${{ env.VCPKG_VERSION }}
+        - name: "Bootstrap vcpkg"
+          run: bootstrap-vcpkg.bat
+          working-directory: vcpkg
+        - name: "Install vcpkg"
+          run: vcpkg integrate install
+          working-directory: vcpkg
+        - name: "Build gtk:x64-windows"
+          run: vcpkg install gtk:x64-windows
+          working-directory: vcpkg
+        - name: Export gtk:x64-windows
+          run: vcpkg export gtk:x64-windows --zip --output=GTK_x86_64_VS2019
+          working-directory: vcpkg
+        - name: Create release
+          uses: marvinpinto/action-automatic-releases@latest
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            automatic_release_tag: x64-windows
+            prerelease: false
+            title: "x64-windows"
+            files: vcpkg\GTK_x86_64_VS2019.zip
+          if: github.event_name != 'pull_request'
