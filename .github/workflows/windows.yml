@@ -34,9 +34,13 @@ jobs:
         - name: "Install vcpkg"
           run: vcpkg integrate install
           working-directory: vcpkg
-        - name: "Build gtk:x64-windows"
-          run: vcpkg install gtk:x64-windows
+        - name: "Update vcpkg"
+          run: vcpkg update
           working-directory: vcpkg
+        - name: "Build gtk:x64-windows"
+          run: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat" && vcpkg install gtk:x64-windows
+          working-directory: vcpkg
+          shell: cmd
         - name: Export gtk:x64-windows
           run: vcpkg export gtk:x64-windows --zip --output=GTK_x64_VS2019
           working-directory: vcpkg
