@@ -6,6 +6,7 @@ on:
   pull_request:
   schedule:
     - cron: '0 0 * * *'  # every day at midnight
+  workflow_dispatch:
 
 env:
   VCPKG_URL: https://github.com/Microsoft/vcpkg
